@@ -4,6 +4,70 @@
   
   
   <entry>
+    <title>区块链-2-区块链中的数据结构</title>
+    <link href="/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-2-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <url>/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-2-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</url>
+    
+    <content type="html"><![CDATA[<h1 id="hash-pointer-哈希指针">1.hash pointer 哈希指针</h1><p>哈希指针与普通指针不同的是，哈希指针中不仅指向了某个结构体，并且还保存了该结构体的哈希值。</p><p>哈希指针不仅指向了结构体，并且还能检测该结构体是否被篡改。</p><h1 id="block-chain-区块链">2. block chain 区块链</h1><p>区块链就是使用哈希指针代替普通指针的链表。</p><p>第一个区块称为 <strong>genesis block 创世纪块</strong>。</p><p>最后一个区块称为 <strong>most recent block最近块</strong>，最近块的哈希值存储在系统内。</p><blockquote><p><strong>tamper-evident log 防篡改日志</strong></p><p>我们只需要保存最近块的哈希值，就可以校验整个区块链是否被篡改。</p></blockquote><h1 id="merkle-tree-默克尔树">3. merkle tree 默克尔树</h1><p>默克尔树就是使用哈希指针代替普通指针的二叉树。</p><p>默克尔树的叶子节点是数据块，存储实际的数据；非叶子节点保存了其左右子节点的哈希值。</p><p>通过保存根节点的哈希值，就可以校验整个默克尔树是否被篡改。</p><blockquote><p>比特币中，默克尔树存储于 <strong>block body区块身</strong>，默克尔树的根哈希值存储于 <strong>block header区块头</strong>。默克尔树的叶子节点（数据块）中存储 <strong>TX(Transaction) 交易</strong>。</p></blockquote><p><strong>merkle proof 默克尔证明</strong></p><p>比特币的使用端有两种：全节点和轻节点</p><p>全节点：保存了整个区块的内容。</p><p>轻节点：仅保存了区块头的内容。</p><p>轻节点可以使用默克尔证明来校验某一个 TX 交易的真实性：</p><ol type="1"><li><p>轻节点向全节点请求交易所在叶子节点到根节点路径上另一边的哈希值。</p></li><li><p>轻节点根据交易对象提供的 TX 交易计算哈希值。</p></li><li><p>将计算得到的哈希值与请求得到的另一边的哈希值结合为非叶子节点，然后对非叶子节点求哈希值。如此迭代，直到计算出一个根哈希值。</p></li><li><p>将计算得到的根哈希值与区块头中保存的根哈希值比较，最终校验交易是否已经写到区块链上。</p></li></ol><p>默克尔证明的时间复杂度为 <spanclass="math inline">\(O(log(n))\)</span></p><blockquote><p>sorted merkle tree 排序的默克尔树</p><p>默克树可以在<spanclass="math inline">\(O(log(n))\)</span>的复杂度下证明交易存在于某个区块，而证明区块中不包含某个交易，则需要<spanclass="math inline">\(O(n)\)</span>的时间复杂度。</p><p>对于排序的默克尔树，则可以实现<spanclass="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个交易。</p><p>比特币中没有用到排序的默克尔树。</p></blockquote><h1 id="扩展其他的数据结构">4. 扩展其他的数据结构</h1><p><strong>无环的数据结构均可以通过让哈希指针替换普通指针形成新数据结构。</strong></p><p>有环的区块下，哈希指针会产生循环依赖，因此较难找到这样的一个数据结构。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>区块链</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>区块链</tag>
+      
+      <tag>hash</tag>
+      
+      <tag>比特币</tag>
+      
+      <tag>哈希指针</tag>
+      
+      <tag>默克尔树</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>区块链-1-区块链中的密码学</title>
+    <link href="/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-1-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    <url>/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-1-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/</url>
+    
+    <content type="html"><![CDATA[<p>Crypto-Currency 加密货币其实本身不加密</p><h1 id="cryptographic-hash-function密码哈希函数">1. cryptographic hashfunction密码哈希函数</h1><p>比特币中的哈希函数：SHA-256 (Secure Hash Algorithm 256)</p><h2 id="collision-resistance-抗哈希碰撞性">1.1. collision resistance抗哈希碰撞性</h2><p>含义：无法高效的方法寻找两个哈希碰撞的输入。</p><p>说明：已知 <span class="math inline">\(H(x_1) =y\)</span>，没有一个高效的方法可以寻找到 <spanclass="math inline">\(x_2\)</span> 使得 <spanclass="math inline">\(H(x_2) = y\)</span>。</p><p>无法证明一个哈希函数具备抗哈希碰撞性。</p><h2 id="hiding-隐藏性">1.2. hiding 隐藏性</h2><p>含义：哈希函数是单向的，根据输出值无法高效找到输入值。</p><p>说明：已知 <span class="math inline">\(H(x) = y\)</span>，但 <spanclass="math inline">\(x\)</span>未知，没有一个高效的方法可以根据 <spanclass="math inline">\(y\)</span> 找到 <spanclass="math inline">\(x\)</span>。</p><p>hiding 的前提是输入空间足够大且映射分布较均匀。</p><blockquote><p>digital commitment 数字签名 (又称为 digital equivalent of a sealedenvelope 数字化的密封信封)</p><p>输入值后拼接一个随机数，来使得整体输入随机且分布均匀。</p></blockquote><h2 id="puzzle-friendly-无法预测性">1.3. puzzle friendly 无法预测性</h2><p>含义：无法根据输入值去预测输出值或输出值的特征。</p><blockquote><p>挖矿：找到一个随机数 nonce 和 block header区块头的其他信息合并在一起，使得 H(block header) &lt;= target</p></blockquote><h1 id="asymmetric-encryption-algorithm-非对称加密">2. asymmetricencryption algorithm 非对称加密</h1><p>symmetric encryption algorithm 对称加密</p><p>通讯双方在通讯前，提前约定好密钥，然后双方基于这个密钥对信息进行加解密。</p><blockquote><p>对称加密时，密码的分发过程不安全。如果密钥泄露了，那么攻击者就可以获取到所有通讯信息。</p></blockquote><p>asymmetric encryption algorithm 非对称加密</p><p>非对称加密是基于一对公私钥，私钥需要持有人保密，公钥无需保密，可以发送给任何人。</p><p>公私钥有两种用法：</p><ul><li><p>公钥加密，私钥解密：保证加密数据仅有私钥的持有者才能解密。</p></li><li><p>私钥加密，公钥解密：保证加密数据来自于私钥的持有者。</p></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>区块链</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>区块链</tag>
+      
+      <tag>hash</tag>
+      
+      <tag>比特币</tag>
+      
+      <tag>密码学</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>MySQL的日志</title>
     <link href="/linmu-blog/2024/08/27/MySQL%E7%9A%84%E6%97%A5%E5%BF%97/"/>
     <url>/linmu-blog/2024/08/27/MySQL%E7%9A%84%E6%97%A5%E5%BF%97/</url>
