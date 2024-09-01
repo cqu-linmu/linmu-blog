@@ -19,26 +19,24 @@
   <meta name="author" content="linmu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.hash pointer 哈希指针 哈希指针与普通指针不同的是，哈希指针中不仅指向了某个结构体，并且还保存了该结构体的哈希值。 哈希指针不仅指向了结构体，并且还能检测该结构体是否被篡改。 2. block chain 区块链 区块链就是使用哈希指针代替普通指针的链表。 第一个区块称为 genesis block 创世纪块。 最后一个区块称为 most recent block 最">
+    <meta name="description" content="1. 并发和串行执行速度对比 我们可以简单对比在计数递增的场景下，并发和串行的执行速度： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960public static void main(String[] args) thr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="区块链-2-区块链中的数据结构">
-<meta property="og:url" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-2-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:title" content="并发编程-1-上下文切换">
+<meta property="og:url" content="https://cqu-linmu.github.io/linmu-blog/2024/09/01/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/index.html">
 <meta property="og:site_name" content="Linmu Blog">
-<meta property="og:description" content="1.hash pointer 哈希指针 哈希指针与普通指针不同的是，哈希指针中不仅指向了某个结构体，并且还保存了该结构体的哈希值。 哈希指针不仅指向了结构体，并且还能检测该结构体是否被篡改。 2. block chain 区块链 区块链就是使用哈希指针代替普通指针的链表。 第一个区块称为 genesis block 创世纪块。 最后一个区块称为 most recent block 最">
+<meta property="og:description" content="1. 并发和串行执行速度对比 我们可以简单对比在计数递增的场景下，并发和串行的执行速度： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960public static void main(String[] args) thr">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-27T10:46:24.000Z">
-<meta property="article:modified_time" content="2024-08-27T10:47:31.596Z">
+<meta property="article:published_time" content="2024-09-01T07:57:09.000Z">
+<meta property="article:modified_time" content="2024-09-01T11:05:32.586Z">
 <meta property="article:author" content="linmu">
-<meta property="article:tag" content="区块链">
-<meta property="article:tag" content="hash">
-<meta property="article:tag" content="比特币">
-<meta property="article:tag" content="哈希指针">
-<meta property="article:tag" content="默克尔树">
+<meta property="article:tag" content="并发编程">
+<meta property="article:tag" content="多线程">
+<meta property="article:tag" content="上下文">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>区块链-2-区块链中的数据结构 - Linmu Blog</title>
+  <title>并发编程-1-上下文切换 - Linmu Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="区块链-2-区块链中的数据结构"></span>
+            <span id="subtitle" data-typed-text="并发编程-1-上下文切换"></span>
           
         </div>
 
@@ -215,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-27 18:46" pubdate>
-          2024年8月27日 晚上
+        <time datetime="2024-09-01 15:57" pubdate>
+          2024年9月1日 下午
         </time>
       </span>
     
@@ -227,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          729 字
+          1.2k 字
         
       </span>
     
@@ -238,7 +236,7 @@
         
         
         
-          7 分钟
+          11 分钟
         
       </span>
     
@@ -275,58 +273,105 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">区块链-2-区块链中的数据结构</h1>
+            <h1 id="seo-header">并发编程-1-上下文切换</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="hash-pointer-哈希指针">1.hash pointer 哈希指针</h1>
-<p>哈希指针与普通指针不同的是，哈希指针中不仅指向了某个结构体，并且还保存了该结构体的哈希值。</p>
-<p>哈希指针不仅指向了结构体，并且还能检测该结构体是否被篡改。</p>
-<h1 id="block-chain-区块链">2. block chain 区块链</h1>
-<p>区块链就是使用哈希指针代替普通指针的链表。</p>
-<p>第一个区块称为 <strong>genesis block 创世纪块</strong>。</p>
-<p>最后一个区块称为 <strong>most recent block
-最近块</strong>，最近块的哈希值存储在系统内。</p>
-<blockquote>
-<p><strong>tamper-evident log 防篡改日志</strong></p>
-<p>我们只需要保存最近块的哈希值，就可以校验整个区块链是否被篡改。</p>
-</blockquote>
-<h1 id="merkle-tree-默克尔树">3. merkle tree 默克尔树</h1>
-<p>默克尔树就是使用哈希指针代替普通指针的二叉树。</p>
-<p>默克尔树的叶子节点是数据块，存储实际的数据；非叶子节点保存了其左右子节点的哈希值。</p>
-<p>通过保存根节点的哈希值，就可以校验整个默克尔树是否被篡改。</p>
-<blockquote>
-<p>比特币中，默克尔树存储于 <strong>block body
-区块身</strong>，默克尔树的根哈希值存储于 <strong>block header
-区块头</strong>。默克尔树的叶子节点（数据块）中存储 <strong>TX
-(Transaction) 交易</strong>。</p>
-</blockquote>
-<p><strong>merkle proof 默克尔证明</strong></p>
-<p>比特币的使用端有两种：全节点和轻节点</p>
-<p>全节点：保存了整个区块的内容。</p>
-<p>轻节点：仅保存了区块头的内容。</p>
-<p>轻节点可以使用默克尔证明来校验某一个 TX 交易的真实性：</p>
-<ol type="1">
-<li><p>轻节点向全节点请求交易所在叶子节点到根节点路径上另一边的哈希值。</p></li>
-<li><p>轻节点根据交易对象提供的 TX 交易计算哈希值。</p></li>
-<li><p>将计算得到的哈希值与请求得到的另一边的哈希值结合为非叶子节点，然后对非叶子节点求哈希值。如此迭代，直到计算出一个根哈希值。</p></li>
-<li><p>将计算得到的根哈希值与区块头中保存的根哈希值比较，最终校验交易是否已经写到区块链上。</p></li>
-</ol>
-<p>默克尔证明的时间复杂度为 <span
-class="math inline">\(O(log(n))\)</span></p>
-<blockquote>
-<p>sorted merkle tree 排序的默克尔树</p>
-<p>默克树可以在<span
-class="math inline">\(O(log(n))\)</span>的复杂度下证明交易存在于某个区块，而证明区块中不包含某个交易，则需要<span
-class="math inline">\(O(n)\)</span>的时间复杂度。</p>
-<p>对于排序的默克尔树，则可以实现<span
-class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个交易。</p>
-<p>比特币中没有用到排序的默克尔树。</p>
-</blockquote>
-<h1 id="扩展其他的数据结构">4. 扩展其他的数据结构</h1>
-<p><strong>无环的数据结构均可以通过让哈希指针替换普通指针形成新数据结构。</strong></p>
-<p>有环的区块下，哈希指针会产生循环依赖，因此较难找到这样的一个数据结构。</p>
+                <h1 id="并发和串行执行速度对比">1. 并发和串行执行速度对比</h1>
+<p>我们可以简单对比在计数递增的场景下，并发和串行的执行速度：<br>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">10000</span>;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">averageTestCount</span> <span class="hljs-operator">=</span> <span class="hljs-number">10</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">6</span>;i++) &#123;<br>        System.out.println(<span class="hljs-string">&quot;test:&quot;</span>+count);<br>        <span class="hljs-type">long</span> <span class="hljs-variable">time1</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">time2</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;averageTestCount;j++) &#123;<br>            time1 += testConcurrency(count);<br>            time2 += testSerial(count);<br>        &#125;<br>        time1 /= averageTestCount;<br>        time2 /= averageTestCount;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">format</span> <span class="hljs-operator">=</span> String.format(<span class="hljs-string">&quot;并发:%s | 串行:%s | 差值:%s&quot;</span>, time1, time2, time1-time2);<br>        System.out.println(format);<br><br>        count *= <span class="hljs-number">10</span>;<br>        System.gc();<br>        Thread.sleep(<span class="hljs-number">1000</span>);<br>    &#125;<br><br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">long</span> <span class="hljs-title function_">testConcurrency</span><span class="hljs-params">(<span class="hljs-type">long</span> count)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;<br>    <span class="hljs-type">Thread</span> <span class="hljs-variable">thread</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; &#123;<br>        <span class="hljs-type">long</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; count; i++) &#123;<br>            a += <span class="hljs-number">5</span>;<br>        &#125;<br>    &#125;);<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.nanoTime();<br>    <span class="hljs-comment">// a</span><br>    thread.start();<br>    <span class="hljs-comment">// b</span><br>    <span class="hljs-type">long</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> j=<span class="hljs-number">0</span>;j&lt;count;j++) &#123;<br>        b += <span class="hljs-number">5</span>;<br>    &#125;<br>    thread.join();<br>    <span class="hljs-type">long</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> System.nanoTime();<br>    <span class="hljs-keyword">return</span> end - start;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">long</span> <span class="hljs-title function_">testSerial</span><span class="hljs-params">(<span class="hljs-type">long</span> count)</span> &#123;<br>    <span class="hljs-type">long</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> System.nanoTime();<br>    <span class="hljs-comment">// a</span><br>    <span class="hljs-type">long</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> i=<span class="hljs-number">0</span>;i&lt;count;i++) &#123;<br>        a += <span class="hljs-number">5</span>;<br>    &#125;<br>    <span class="hljs-comment">// b</span><br>    <span class="hljs-type">long</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">long</span> j=<span class="hljs-number">0</span>;j&lt;count;j++) &#123;<br>        b += <span class="hljs-number">5</span>;<br>    &#125;<br><br>    <span class="hljs-type">long</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> System.nanoTime();<br>    <span class="hljs-keyword">return</span> end - start;<br>&#125;<br><br></code></pre></td></tr></table></figure> 我们可以分别测试数量为 <span
+class="math inline">\(10^4、10^5、10^6、10^7、10^8、10^9\)</span>
+时，并发和串行的耗时:<br></p>
+<table>
+<thead>
+<tr>
+<th>循环次数</th>
+<th>并发行执行耗时(ns)</th>
+<th>串行执行耗时(ns)</th>
+<th>差值(ns)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(10^4\)</span></td>
+<td>352430</td>
+<td>90920</td>
+<td>慢261510</td>
+</tr>
+<tr>
+<td><span class="math inline">\(10^5\)</span></td>
+<td>400760</td>
+<td>104020</td>
+<td>慢296740</td>
+</tr>
+<tr>
+<td><span class="math inline">\(10^6\)</span></td>
+<td>632220</td>
+<td>518520</td>
+<td>慢113700</td>
+</tr>
+<tr>
+<td><span class="math inline">\(10^7\)</span></td>
+<td>4099540</td>
+<td>5438800</td>
+<td>快1339260</td>
+</tr>
+<tr>
+<td><span class="math inline">\(10^8\)</span></td>
+<td>29268920</td>
+<td>46877000</td>
+<td>快17608080</td>
+</tr>
+<tr>
+<td><span class="math inline">\(10^9\)</span></td>
+<td>293388350</td>
+<td>476937870</td>
+<td>快183549520</td>
+</tr>
+</tbody>
+</table>
+<p>从表格中我们可以发现当数量级达到百万级时，并发的提升效果才逐渐体现出来。<br>
+为什么明明启动了多个线程，执行的速度却更慢呢？<br>
+这是因为并发方法执行时存在线程创建、线程同步和上下文切换等等额外的开销。</p>
+<hr />
+<h1 id="什么是上下文切换">2. 什么是上下文切换？</h1>
+<p><strong>让程序执行得更快是并发的核心目标</strong>。然而，启动更多的线程未必能提升程序运行的速度，因为我们<em>很难做到程序得到最大限度的并发执行</em>。<br>
+一方面是线程创建、线程同步等操作影响了并发执行的效率，另一方面则是<strong>线程上下文切换</strong>的开销。<br></p>
+<p>目前的大多数CPU都是支持并发执行的，这通常是通过CPU给每一个线程分配时间片这样的机制来实现的。时间片就是CPU分配给各个线程可以执行的时间。由于时间片的时间非常短，一般是几十毫秒，所以CPU会不停的的切换执行的线程，这样从宏观维度上让我们感觉多个线程在同时执行。<br></p>
+<p>在发生执行的线程切换时，我们需要保存当前线程已执行的位置和一些中间状态等信息，以便于后续该线程再次执行时可以加载到当前的执行状态。<strong>这些线程切换时保存的信息就是上下文，线程从保存信息再到加载恢复的过程就是一次上下文切换</strong>。<br></p>
+<hr />
+<h1 id="减少上下文切换">3. 减少上下文切换</h1>
+<h2 id="无锁并发">3.1. 无锁并发</h2>
+<p>多线程竞争锁时，会引起额外的上下文切换。因此我们可以通过在并发编程时尽量避免锁竞争，来减少上下文切换的开销。<br>
+这里有两种避免锁竞争的方式:<br> -
+避免线程冲突，如提前划分好各线程处理的资源，各线程独立处理各自部分的数据。
+- CAS算法，Java中JUC包内大量采用了本算法来提供线程安全的解决方案。</p>
+<h2 id="减少线程使用数量">3.2. 减少线程使用数量</h2>
+<p>当任务数量小于线程数量时，会有部分线程处于等待状态，等待状态的线程同样会获取时间片，因此会产生空耗的上下文切换。<br>
+因此尽量减少线程的数量可以减少上下文切换次数。</p>
+<h2 id="协程">3.3. 协程</h2>
+<p>协程通过在单个线程内实现多任务的调度，可以避免大量的上下文切换。</p>
+<h1 id="上下文切换优化实战">4. 上下文切换优化实战</h1>
+<p><strong>第一步，获取dump线程信息</strong><br> 通过 jstack 命令获取
+pid 为 31177 的进程的线程信息 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">sudo -u admin jstack 31177 &gt; dumpTest<br></code></pre></td></tr></table></figure></p>
+<p><strong>第二步，查看线程状态统计</strong><br> 通过
+grep、awk、sort、uniq 等命令统计线程状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">grep java.lang.Thread.State dumpTest | awk &#x27;&#123;print $2$3$4$5&#125;&#x27; | sort | uniq -c<br></code></pre></td></tr></table></figure>
+<p>结果如下：<br></p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">39 </span>RUNNABLE<br><span class="hljs-symbol">21 </span>TIMED_WAITING(onobjectmonitor)<br><span class="hljs-symbol">6 </span>TIMED_WAITING(parking)<br><span class="hljs-symbol">51 </span>TIMED_WAITING(sleeping)<br><span class="hljs-symbol">305 </span>WAITING(onobjectmonitor)<br><span class="hljs-symbol">3 </span>WAITING(parking)<br></code></pre></td></tr></table></figure>
+<p>这里发现有 300 多个线程处于 <code>WAITING(onobjectmonitor)</code>
+状态。<br></p>
+<p><strong>第三步，查看线程的具体执行信息</strong><br> 到 dump
+文件中查看处于 <code>WAITING(onobjectmonitor)</code>
+状态的线程的具体执行信息。<br>
+若发现这些线程大多属于某个工作线程，且状态为
+<code>await</code>，则较大可能该工作线程内存在大量闲置线程。<br></p>
+<p><strong>第四步，调整线程使用</strong><br>
+如该工作线程中使用了线程池，那么适当调整该线程池的配置，如核心线程数、最大线程数、线程空闲时间等。</p>
+<p><strong>第五步，重复以上操作调优</strong><br>
+重启应用，重复前四步操作。</p>
+<hr />
 
                 
               </div>
@@ -345,7 +390,7 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
     
       <span class="category-chain">
         
-  <a href="/linmu-blog/categories/%E5%8C%BA%E5%9D%97%E9%93%BE/" class="category-chain-item">区块链</a>
+  <a href="/linmu-blog/categories/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="category-chain-item">并发编程</a>
   
   
 
@@ -360,15 +405,11 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/linmu-blog/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" class="print-no-link">#区块链</a>
+        <a href="/linmu-blog/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="print-no-link">#并发编程</a>
       
-        <a href="/linmu-blog/tags/hash/" class="print-no-link">#hash</a>
+        <a href="/linmu-blog/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="print-no-link">#多线程</a>
       
-        <a href="/linmu-blog/tags/%E6%AF%94%E7%89%B9%E5%B8%81/" class="print-no-link">#比特币</a>
-      
-        <a href="/linmu-blog/tags/%E5%93%88%E5%B8%8C%E6%8C%87%E9%92%88/" class="print-no-link">#哈希指针</a>
-      
-        <a href="/linmu-blog/tags/%E9%BB%98%E5%85%8B%E5%B0%94%E6%A0%91/" class="print-no-link">#默克尔树</a>
+        <a href="/linmu-blog/tags/%E4%B8%8A%E4%B8%8B%E6%96%87/" class="print-no-link">#上下文</a>
       
     </div>
   
@@ -380,8 +421,8 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>区块链-2-区块链中的数据结构</div>
-      <div>https://cqu-linmu.github.io/linmu-blog/2024/08/27/区块链-2-区块链中的数据结构/</div>
+      <div>并发编程-1-上下文切换</div>
+      <div>https://cqu-linmu.github.io/linmu-blog/2024/09/01/并发编程-1-上下文切换/</div>
     </div>
     <div class="license-meta">
       
@@ -393,13 +434,13 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月27日</div>
+          <div>2024年9月1日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月27日</div>
+          <div>2024年9月1日</div>
         </div>
       
       
@@ -442,18 +483,12 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/linmu-blog/2024/09/01/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-1-%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2/" title="并发编程-1-上下文切换">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">并发编程-1-上下文切换</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-1-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E5%AF%86%E7%A0%81%E5%AD%A6/" title="区块链-1-区块链中的密码学">
-                        <span class="hidden-mobile">区块链-1-区块链中的密码学</span>
+                      <a href="/linmu-blog/2024/08/27/%E5%8C%BA%E5%9D%97%E9%93%BE-2-%E5%8C%BA%E5%9D%97%E9%93%BE%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="区块链-2-区块链中的数据结构">
+                        <span class="hidden-mobile">区块链-2-区块链中的数据结构</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -510,12 +545,6 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
 
 
   
-
-
-  
-  
-
-
 
 
 
@@ -708,49 +737,6 @@ class="math inline">\(O(log(n))\)</span>复杂度证明区块中不存在某个�
 
 
   <script>Fluid.plugins.imageCaption();</script>
-
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-
-        Fluid.events.registerRefreshCallback(function() {
-          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-            MathJax.typesetPromise();
-          }
-        });
-      </script>
-    
-
-  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/linmu-blog/js/local-search.js" ></script>
 
