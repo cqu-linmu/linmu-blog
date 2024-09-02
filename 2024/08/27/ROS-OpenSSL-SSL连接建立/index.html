@@ -19,25 +19,23 @@
   <meta name="author" content="linmu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ROS-OpenSSL-SSL-Connection-Build 重庆大学国家卓越工程师学院-智能汽车软件-智能网联汽车信息安全-实验 ✨✨✨实验环境✨✨✨：Windows 10 Linux SubsystemBRANCH: vb_releaseRELEASE: Ubuntu 20.04.3 LTSKERNEL: Linux 5.10.16.3-microsoft-standard-WSL">
+    <meta name="description" content="ROS-OpenSSL-SSL-Connection-Build 重庆大学国家卓越工程师学院-智能汽车软件-智能网联汽车信息安全-实验 ✨✨✨实验环境✨✨✨： Windows 10 Linux Subsystem BRANCH: vb_release RELEASE: Ubuntu 20.04.3 LTS KERNEL: Linux 5.10.16.3-microsoft-standard">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ROS OpenSSL SSL连接建立">
 <meta property="og:url" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/index.html">
 <meta property="og:site_name" content="Linmu Blog">
-<meta property="og:description" content="ROS-OpenSSL-SSL-Connection-Build 重庆大学国家卓越工程师学院-智能汽车软件-智能网联汽车信息安全-实验 ✨✨✨实验环境✨✨✨：Windows 10 Linux SubsystemBRANCH: vb_releaseRELEASE: Ubuntu 20.04.3 LTSKERNEL: Linux 5.10.16.3-microsoft-standard-WSL">
+<meta property="og:description" content="ROS-OpenSSL-SSL-Connection-Build 重庆大学国家卓越工程师学院-智能汽车软件-智能网联汽车信息安全-实验 ✨✨✨实验环境✨✨✨： Windows 10 Linux Subsystem BRANCH: vb_release RELEASE: Ubuntu 20.04.3 LTS KERNEL: Linux 5.10.16.3-microsoft-standard">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/1.png">
-<meta property="og:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/2.png">
-<meta property="og:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/3.png">
-<meta property="og:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/4.png">
+<meta property="og:image" content="https://s2.loli.net/2024/09/02/H1UtaXcvjIsGuZ4.webp">
+<meta property="og:image" content="https://s2.loli.net/2024/09/02/7VksjoQBNAJcSyW.png">
 <meta property="article:published_time" content="2024-08-27T10:23:38.000Z">
-<meta property="article:modified_time" content="2024-09-02T02:40:41.938Z">
+<meta property="article:modified_time" content="2024-09-02T12:19:18.240Z">
 <meta property="article:author" content="linmu">
 <meta property="article:tag" content="ROS">
 <meta property="article:tag" content="OpenSSL">
 <meta property="article:tag" content="SSL">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/1.png">
+<meta name="twitter:image" content="https://s2.loli.net/2024/09/02/H1UtaXcvjIsGuZ4.webp">
   
   
   
@@ -285,12 +283,12 @@
                 
                 <h1
 id="ros-openssl-ssl-connection-build">ROS-OpenSSL-SSL-Connection-Build</h1>
-<p>重庆大学国家卓越工程师学院-智能汽车软件-智能网联汽车信息安全-实验
-<br /><strong>✨✨✨实验环境✨✨✨：</strong><br />Windows 10 Linux
-Subsystem<br />BRANCH: vb_release<br />RELEASE: Ubuntu 20.04.3
-LTS<br />KERNEL: Linux 5.10.16.3-microsoft-standard-WSL2<br />openssl
+<p>重庆大学国家卓越工程师学院-智能汽车软件-智能网联汽车信息安全-实验<br>
+<strong>✨✨✨实验环境✨✨✨：</strong><br> Windows 10 Linux
+Subsystem<br> BRANCH: vb_release<br> RELEASE: Ubuntu 20.04.3 LTS<br>
+KERNEL: Linux 5.10.16.3-microsoft-standard-WSL2<br> openssl
 版本：OpenSSL 1.1.1f 31 Mar 2020</p>
-<p><strong>✨✨✨实验准备✨✨✨：</strong><br />创建三级证书链。<br /><a
+<p><strong>✨✨✨实验准备✨✨✨：</strong><br> 创建三级证书链。<br> <a
 href="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-X509-%E8%AF%81%E4%B9%A6%E9%93%BE%E6%9E%84%E5%BB%BA%E5%8F%8A%E8%87%AA%E5%AE%9A%E4%B9%89%E9%AA%8C%E8%AF%81/">ROS
 OpenSSL X509 证书链构建及自定义验证</a></p>
 <h1 id="ssl-建立连接">SSL 建立连接</h1>
@@ -300,53 +298,62 @@ OpenSSL X509 证书链构建及自定义验证</a></p>
 <li>密钥协商阶段：协商确定后续通信使用的对称密钥。</li>
 <li>校验阶段：根据之前通信内容生成hash。</li>
 </ol>
-<p>这里大致的流程图如下：<br /><img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/1.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="SSL 建立连接流程图"></p>
+<p>这里大致的流程图如下：<br> <img
+src="https://s2.loli.net/2024/09/02/awtyjizxvTcBWoL.webp" srcset="/linmu-blog/img/loading.gif" lazyload
+alt="SSL 建立连接流程图" /></p>
 <blockquote>
 <p>图中密钥协商使用的是 ECDHE
 密钥协商算法，后续实验也是使用这个算法。</p>
 </blockquote>
-<p>详细的知识点说明许多文章已经写地非常详尽，这里就直接给出几个个博客，本文就不再赘述了。<br />相关参考资料：<br /><a
-target="_blank" rel="noopener" href="http://t.csdn.cn/MLs6W">SSL协议原理详解_ssl原理_曹世宏的博客的博客-CSDN博客</a><br /><a
-target="_blank" rel="noopener" href="http://t.csdn.cn/Sp9sb">TLS/SSL 协议详解 (30)
+<p>详细的知识点说明许多文章已经写地非常详尽，这里就直接给出几个个博客，本文就不再赘述了。<br>
+相关参考资料：<br> <a
+target="_blank" rel="noopener" href="http://t.csdn.cn/MLs6W">SSL协议原理详解_ssl原理_曹世宏的博客的博客-CSDN博客</a><br>
+<a target="_blank" rel="noopener" href="http://t.csdn.cn/Sp9sb">TLS/SSL 协议详解 (30)
 SSL中的RSA、DHE、ECDHE、ECDH流程与区别_ssl
-dh和rsa区别_Mrpre的博客-CSDN博客</a><br /><a
+dh和rsa区别_Mrpre的博客-CSDN博客</a><br> <a
 target="_blank" rel="noopener" href="http://t.csdn.cn/mfwoC">密钥协商算法的演变 —— RSA算法 - DH算法 -
 DHE算法 - ECDHE算法_故里有长安丶丶的博客-CSDN博客</a></p>
 <h1 id="ros-服务介绍">ROS 服务介绍</h1>
-<p>服务是ROS中的一种通信方法。它与话题通信的区别是，服务允许客户端（Client）发送请求（request）到服务端（Server）并等候服务端的响应（response）。因此，服务机制是一种双向的同步通信机制，且实现一对多的通信。<br /><br />在使用时，需要首先启动
-Master节点，然后运行 Server 节点，最后开启 Client 节点。<br />这里在
-Server 中需要编写回调函数用于处理 Client 的请求。Client
-内要组装请求信息，并通过 Client 的 call 方法发起请求。这里的 call
-方法是阻塞的，所以在后续代码中可以直接使用 请求的返回信息。</p>
-<img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/2.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="ROS 服务架构">
+<p>服务是ROS中的一种通信方法。它与话题通信的区别是，服务允许客户端（Client）发送请求（request）到服务端（Server）并等候服务端的响应（response）。因此，服务机制是一种双向的同步通信机制，且实现一对多的通信。<br>
+在使用时，需要首先启动 Master节点，然后运行 Server 节点，最后开启 Client
+节点。<br> 这里在 Server 中需要编写回调函数用于处理 Client
+的请求。Client 内要组装请求信息，并通过 Client 的 call
+方法发起请求。这里的 call 方法是阻塞的，所以在后续代码中可以直接使用
+请求的返回信息。</p>
+<figure>
+<img src="https://s2.loli.net/2024/09/02/H1UtaXcvjIsGuZ4.webp" srcset="/linmu-blog/img/loading.gif" lazyload
+alt="ROS 服务架构" />
+<figcaption aria-hidden="true">ROS 服务架构</figcaption>
+</figure>
 <h1 id="代码">代码</h1>
 <p><a
 target="_blank" rel="noopener" href="https://github.com/LinMu-z/ROS-OpenSSL-SSL-Build-Connect">GitHub -
-LinMu-z/ROS-OpenSSL-SSL-Build-Connect</a><br /><a
+LinMu-z/ROS-OpenSSL-SSL-Build-Connect</a><br> <a
 target="_blank" rel="noopener" href="https://gitee.com/forestwood/ROS-OpenSSL-SSL-Build-Connect">Gitee
-- 林木/ROS-OpenSSL-SSL-Build-Connect</a> &gt;
+- 林木/ROS-OpenSSL-SSL-Build-Connect</a><br> &gt;
 注意本实验中实现的SSL连接建立过程为简化，没有加上
 hash计算。读者可自行学习后补充。</p>
 <h2 id="核心代码讲解">核心代码讲解</h2>
 <p>在 OpenSSL 中对于 ECDHE 算法的实现主要通过 EC_KEY
-及其相关类，这里将其相关流程抽象为工具类 KeyAgree
-如下：<br />每一次创建连接都需要创建一次密钥对，这里创建的过程放在了，里面主要包含获取公私钥的方法，其中公钥是需要传输的给对方的。<br />其中有两个私有方法，为公钥的数据类型转换函数。
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;openssl/ec.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;openssl/ecdh.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;openssl/obj_mac.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">KeyAgree</span> &#123;<br>    <span class="hljs-keyword">private</span>:<br>        EC_KEY* ec_key;<br>        <span class="hljs-type">const</span> EC_GROUP* group;<br>        EC_POINT* key_other;<br>        <span class="hljs-comment">// ec_point 转为 string</span><br>        <span class="hljs-function">EC_POINT* <span class="hljs-title">ec_point_from_string</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; str)</span></span>;<br>        <span class="hljs-comment">// string 转为 ec_point</span><br>        <span class="hljs-function">string <span class="hljs-title">ec_point_to_string</span><span class="hljs-params">(<span class="hljs-type">const</span> EC_POINT* point)</span></span>;<br>    <span class="hljs-keyword">public</span>:<br>        <span class="hljs-built_in">KeyAgree</span>();<br>        ~<span class="hljs-built_in">KeyAgree</span>();<br>        <span class="hljs-function"><span class="hljs-type">const</span> BIGNUM* <span class="hljs-title">getPrivateKey</span><span class="hljs-params">()</span></span>;<br>        <span class="hljs-function">string <span class="hljs-title">getPublicKey</span><span class="hljs-params">()</span></span>;<br>        <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setOtherKey</span><span class="hljs-params">(string keyStr)</span></span>;<br>        <span class="hljs-function">string <span class="hljs-title">getShareKey</span><span class="hljs-params">()</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure></p>
+及其相关类，这里将其相关流程抽象为工具类 KeyAgree 如下：<br>
+每一次创建连接都需要创建一次密钥对，这里创建的过程放在了，里面主要包含获取公私钥的方法，其中公钥是需要传输的给对方的。<br>
+其中有两个私有方法，为公钥的数据类型转换函数。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;openssl/ec.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;openssl/ecdh.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;openssl/obj_mac.h&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">KeyAgree</span> &#123;<br>    <span class="hljs-keyword">private</span>:<br>        EC_KEY* ec_key;<br>        <span class="hljs-type">const</span> EC_GROUP* group;<br>        EC_POINT* key_other;<br>        <span class="hljs-comment">// ec_point 转为 string</span><br>        <span class="hljs-function">EC_POINT* <span class="hljs-title">ec_point_from_string</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; str)</span></span>;<br>        <span class="hljs-comment">// string 转为 ec_point</span><br>        <span class="hljs-function">string <span class="hljs-title">ec_point_to_string</span><span class="hljs-params">(<span class="hljs-type">const</span> EC_POINT* point)</span></span>;<br>    <span class="hljs-keyword">public</span>:<br>        <span class="hljs-built_in">KeyAgree</span>();<br>        ~<span class="hljs-built_in">KeyAgree</span>();<br>        <span class="hljs-function"><span class="hljs-type">const</span> BIGNUM* <span class="hljs-title">getPrivateKey</span><span class="hljs-params">()</span></span>;<br>        <span class="hljs-function">string <span class="hljs-title">getPublicKey</span><span class="hljs-params">()</span></span>;<br>        <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setOtherKey</span><span class="hljs-params">(string keyStr)</span></span>;<br>        <span class="hljs-function">string <span class="hljs-title">getShareKey</span><span class="hljs-params">()</span></span>;<br>&#125;;<br></code></pre></td></tr></table></figure></p>
 <p>在构造函数内，首先设定了 ECDHE 算法使用的椭圆曲线，然后生成密钥对。
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp">KeyAgree::<span class="hljs-built_in">KeyAgree</span>() &#123;<br>    <span class="hljs-comment">// 指定曲线</span><br>    ec_key = <span class="hljs-built_in">EC_KEY_new_by_curve_name</span>(NID_X9_62_prime256v1);<br>    <span class="hljs-keyword">if</span> (!ec_key) &#123;<br>        cerr &lt;&lt; <span class="hljs-string">&quot;Failed to create EC key.&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">// 生成密钥对</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">EC_KEY_generate_key</span>(ec_key) != <span class="hljs-number">1</span>) &#123;<br>        cerr &lt;&lt; <span class="hljs-string">&quot;Failed to generate EC key.&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">// 获取密钥组</span><br>    group = <span class="hljs-built_in">EC_KEY_get0_group</span>(ec_key);<br>&#125;<br></code></pre></td></tr></table></figure></p>
 <p>在获取公钥函数中，首先通过 EC_KEY_get0_public_key
 方法从密钥对中提取公钥，这里看到 公钥的数据类型为
 EC_POINT，为了便于传输我们这里将其串行化。同时为了提高log的可读性，我们将其转化为十六进制。
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">KeyAgree::getPublicKey</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 获取私钥</span><br>    <span class="hljs-type">const</span> EC_POINT* key = <span class="hljs-built_in">EC_KEY_get0_public_key</span>(ec_key);<br>    cout &lt;&lt; <span class="hljs-string">&quot;Public key:&quot;</span> &lt;&lt; endl;<br><br>    <span class="hljs-comment">// 密钥转为字符串</span><br>    string str = <span class="hljs-built_in">ec_point_to_string</span>(key);<br>    cout &lt;&lt; <span class="hljs-built_in">string_to_hex</span>(str) &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> str;<br>&#125;<br></code></pre></td></tr></table></figure></p>
-<p>生成对称密钥首先需要设置密钥的长度，然后提前创建号密钥的缓冲区，这里使用vector来保存。然后通过输入对方的对等公钥和自身的密钥对。<br />最后将其转化为字符串返回。
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">KeyAgree::getShareKey</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 设置对称密钥长度</span><br>    <span class="hljs-type">size_t</span> shared_key_len = <span class="hljs-number">32</span>;<br>    <span class="hljs-comment">// 用于保存对称密钥</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>&gt; <span class="hljs-title">shared_key</span><span class="hljs-params">(shared_key_len)</span></span>;<br>    <span class="hljs-comment">// 生成对称密钥 (密钥缓存区，密钥长度，对等公钥，本地密钥对)</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">ECDH_compute_key</span>(shared_key.<span class="hljs-built_in">data</span>(), shared_key.<span class="hljs-built_in">size</span>(), key_other, ec_key, <span class="hljs-literal">NULL</span>) != shared_key_len) &#123;<br>        cerr &lt;&lt; <span class="hljs-string">&quot;Failed to compute shared key.&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-comment">// 转为字符串</span><br>    <span class="hljs-function">string <span class="hljs-title">str</span><span class="hljs-params">(shared_key.begin(), shared_key.end())</span></span>;<br>    <span class="hljs-keyword">return</span> str;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>生成对称密钥首先需要设置密钥的长度，然后提前创建号密钥的缓冲区，这里使用vector来保存。然后通过输入对方的对等公钥和自身的密钥对。<br>
+最后将其转化为字符串返回。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">KeyAgree::getShareKey</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 设置对称密钥长度</span><br>    <span class="hljs-type">size_t</span> shared_key_len = <span class="hljs-number">32</span>;<br>    <span class="hljs-comment">// 用于保存对称密钥</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>&gt; <span class="hljs-title">shared_key</span><span class="hljs-params">(shared_key_len)</span></span>;<br>    <span class="hljs-comment">// 生成对称密钥 (密钥缓存区，密钥长度，对等公钥，本地密钥对)</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">ECDH_compute_key</span>(shared_key.<span class="hljs-built_in">data</span>(), shared_key.<span class="hljs-built_in">size</span>(), key_other, ec_key, <span class="hljs-literal">NULL</span>) != shared_key_len) &#123;<br>        cerr &lt;&lt; <span class="hljs-string">&quot;Failed to compute shared key.&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-comment">// 转为字符串</span><br>    <span class="hljs-function">string <span class="hljs-title">str</span><span class="hljs-params">(shared_key.begin(), shared_key.end())</span></span>;<br>    <span class="hljs-keyword">return</span> str;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 <h1 id="实验结果">实验结果</h1>
-<img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/3.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="服务器端">
-<p><br /> <img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/4.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="客户端"><br /> 分析：<br /> 首先由客户端向服务器发送了
-hello
-消息，里面包含了证书套件，然后服务器返回消息中确定了证书套件并附上了证书链。<br />
-之后客户端对证书进行验证，并验证成功。<br />
-客户端生成了对等公钥发送给了服务器，服务器接收到之后马上同样生成了公钥并传给客户端。两者都根据对方的对等公钥及自身的密钥对生成了对称密钥。可以看到双方的对称公钥生成是相同的。<br />
+<p><img src="https://s2.loli.net/2024/09/02/7VksjoQBNAJcSyW.png" srcset="/linmu-blog/img/loading.gif" lazyload
+alt="服务器端" /><br> <img
+src="https://s2.loli.net/2024/09/02/1tLzhDRlfVNdaEP.png" srcset="/linmu-blog/img/loading.gif" lazyload
+alt="客户端" /><br> 分析：<br> 首先由客户端向服务器发送了 hello
+消息，里面包含了证书套件，然后服务器返回消息中确定了证书套件并附上了证书链。<br>
+之后客户端对证书进行验证，并验证成功。<br>
+客户端生成了对等公钥发送给了服务器，服务器接收到之后马上同样生成了公钥并传给客户端。两者都根据对方的对等公钥及自身的密钥对生成了对称密钥。可以看到双方的对称公钥生成是相同的。<br>
 然后客户端 拟定了一条 finish 消息，里面包含了 "hello server!"
 ，并通过对称公钥使用 AES
 对消息内容进行加密，然后传输给了服务器。服务器接收到之后回复了 "hello
