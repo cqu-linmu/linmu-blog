@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. 并发和串行执行速度对比 我们可以简单对比在计数递增的场景下，并发和串行的执行速度： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960public static void main(String[] args) thr">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-01T07:57:09.000Z">
-<meta property="article:modified_time" content="2024-09-01T11:08:16.153Z">
+<meta property="article:modified_time" content="2024-09-02T01:25:55.175Z">
 <meta property="article:author" content="linmu">
 <meta property="article:tag" content="并发编程">
 <meta property="article:tag" content="多线程">
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"cqu-linmu.github.io","root":"/linmu-blog/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/linmu-blog/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"cqu-linmu.github.io","root":"/linmu-blog/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"|","loop":false,"scope":["home","page"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/linmu-blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="并发编程-1-上下文切换"></span>
+            <span id="subtitle">并发编程-1-上下文切换</span>
           
         </div>
 
@@ -440,7 +440,7 @@ grep、awk、sort、uniq 等命令统计线程状态</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月1日</div>
+          <div>2024年9月2日</div>
         </div>
       
       
@@ -625,21 +625,6 @@ grep、awk、sort、uniq 等命令统计线程状态</p>
 <script  src="/linmu-blog/js/events.js" ></script>
 <script  src="/linmu-blog/js/plugins.js" ></script>
 
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
 
 
 

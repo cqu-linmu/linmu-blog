@@ -27,7 +27,7 @@
 <meta property="og:description" content="车辆坐标转换 解决问题： 1）地球是不规则的球体，两极扁，赤道鼓。不能 简单地做为圆球体来计算； 2）每纬度在地理位置上的距离是一致的（约 111 km），但是每经度之间的距离是不同的（越往两极，东 西方向上的距离就越小），不能直接转换为直角坐标系； WGS84坐标系全称World Geodetic System - 1984，是为了解决GPS定位而产生的全球统一的一个地心坐标系。 ●">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-27T07:17:15.000Z">
-<meta property="article:modified_time" content="2024-08-27T09:19:22.964Z">
+<meta property="article:modified_time" content="2024-09-02T02:38:15.020Z">
 <meta property="article:author" content="linmu">
 <meta property="article:tag" content="坐标系转换">
 <meta property="article:tag" content="向量转换">
@@ -74,7 +74,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"cqu-linmu.github.io","root":"/linmu-blog/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/linmu-blog/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"cqu-linmu.github.io","root":"/linmu-blog/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"|","loop":false,"scope":["home","page"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/linmu-blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -202,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="车辆坐标转换"></span>
+            <span id="subtitle">车辆坐标转换</span>
           
         </div>
 
@@ -296,7 +296,7 @@ class="math inline">\({e_2}^2=0.006739496742227\)</span> <br /> ●
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> CenterCoordinate <span class="hljs-title function_">createCenterCoordinateFromBLH</span><span class="hljs-params">(<span class="hljs-type">double</span> latitude, <span class="hljs-type">double</span> longitude, <span class="hljs-type">double</span> altitude)</span> &#123;<br>    <span class="hljs-type">double</span> <span class="hljs-variable">B</span> <span class="hljs-operator">=</span> Math.toRadians(latitude);<br>    <span class="hljs-type">double</span> <span class="hljs-variable">L</span> <span class="hljs-operator">=</span> Math.toRadians(longitude);<br>    <span class="hljs-type">double</span> <span class="hljs-variable">N</span> <span class="hljs-operator">=</span> r/Math.sqrt(<span class="hljs-number">1</span>-e*e*Math.sin(B)*Math.sin(B));<br>    <span class="hljs-type">double</span> <span class="hljs-variable">x</span> <span class="hljs-operator">=</span> (N+altitude)*Math.cos(B)*Math.cos(L);<br>    <span class="hljs-type">double</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> (N+altitude)*Math.cos(B)*Math.sin(L);<br>    <span class="hljs-type">double</span> <span class="hljs-variable">z</span> <span class="hljs-operator">=</span> (N*(<span class="hljs-number">1</span>-e*e)+altitude)*Math.sin(B);<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">CenterCoordinate</span>(x,y,z);<br>&#125;<br></code></pre></td></tr></table></figure>
 <h1 id="车辆方向转换">车辆方向转换</h1>
 <p>上面将经纬度转换为了地心直角坐标，然而速度方向拿到则是一个大陆坐标系下的与正北方的顺时针夹角。所以这里要对其进行转换。<br /></p>
-<embed id="embed" src="大地二位坐标转地心直角三维坐标.drawio.svg" type="image/svg+xml">
+<embed id="embed" src="1.svg" type="image/svg+xml">
 <p>假设条件：</p>
 <ol type="1">
 <li>车辆所处大陆平面坐标系与地球球面相切</li>
@@ -430,7 +430,7 @@ class="math display">\[ U = \sqrt{ \frac{D_{xy} D_{xyz}}{z_a^2} }
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月27日</div>
+          <div>2024年9月2日</div>
         </div>
       
       
@@ -621,21 +621,6 @@ class="math display">\[ U = \sqrt{ \frac{D_{xy} D_{xyz}}{z_a^2} }
 <script  src="/linmu-blog/js/events.js" ></script>
 <script  src="/linmu-blog/js/plugins.js" ></script>
 
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
 
 
 

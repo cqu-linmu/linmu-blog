@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/3.png">
 <meta property="og:image" content="https://cqu-linmu.github.io/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/4.png">
 <meta property="article:published_time" content="2024-08-27T10:23:38.000Z">
-<meta property="article:modified_time" content="2024-08-27T10:30:29.762Z">
+<meta property="article:modified_time" content="2024-09-02T02:40:41.938Z">
 <meta property="article:author" content="linmu">
 <meta property="article:tag" content="ROS">
 <meta property="article:tag" content="OpenSSL">
@@ -79,7 +79,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"cqu-linmu.github.io","root":"/linmu-blog/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/linmu-blog/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"cqu-linmu.github.io","root":"/linmu-blog/","version":"1.9.8","typing":{"enable":true,"typeSpeed":50,"cursorChar":"|","loop":false,"scope":["home","page"]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/linmu-blog/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -207,7 +207,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="ROS OpenSSL SSL连接建立"></span>
+            <span id="subtitle">ROS OpenSSL SSL连接建立</span>
           
         </div>
 
@@ -300,8 +300,7 @@ OpenSSL X509 证书链构建及自定义验证</a></p>
 <li>密钥协商阶段：协商确定后续通信使用的对称密钥。</li>
 <li>校验阶段：根据之前通信内容生成hash。</li>
 </ol>
-<p>这里大致的流程图如下：<br /><img src="1.png" srcset="/linmu-blog/img/loading.gif" lazyload
-alt="SSL 建立连接流程图" /></p>
+<p>这里大致的流程图如下：<br /><img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/1.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="SSL 建立连接流程图"></p>
 <blockquote>
 <p>图中密钥协商使用的是 ECDHE
 密钥协商算法，后续实验也是使用这个算法。</p>
@@ -319,10 +318,7 @@ Master节点，然后运行 Server 节点，最后开启 Client 节点。<br />�
 Server 中需要编写回调函数用于处理 Client 的请求。Client
 内要组装请求信息，并通过 Client 的 call 方法发起请求。这里的 call
 方法是阻塞的，所以在后续代码中可以直接使用 请求的返回信息。</p>
-<figure>
-<img src="2.png" srcset="/linmu-blog/img/loading.gif" lazyload alt="ROS 服务架构" />
-<figcaption aria-hidden="true">ROS 服务架构</figcaption>
-</figure>
+<img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/2.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="ROS 服务架构">
 <h1 id="代码">代码</h1>
 <p><a
 target="_blank" rel="noopener" href="https://github.com/LinMu-z/ROS-OpenSSL-SSL-Build-Connect">GitHub -
@@ -345,8 +341,9 @@ EC_POINT，为了便于传输我们这里将其串行化。同时为了提高log
 <p>生成对称密钥首先需要设置密钥的长度，然后提前创建号密钥的缓冲区，这里使用vector来保存。然后通过输入对方的对等公钥和自身的密钥对。<br />最后将其转化为字符串返回。
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">string <span class="hljs-title">KeyAgree::getShareKey</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// 设置对称密钥长度</span><br>    <span class="hljs-type">size_t</span> shared_key_len = <span class="hljs-number">32</span>;<br>    <span class="hljs-comment">// 用于保存对称密钥</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">unsigned</span> <span class="hljs-type">char</span>&gt; <span class="hljs-title">shared_key</span><span class="hljs-params">(shared_key_len)</span></span>;<br>    <span class="hljs-comment">// 生成对称密钥 (密钥缓存区，密钥长度，对等公钥，本地密钥对)</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">ECDH_compute_key</span>(shared_key.<span class="hljs-built_in">data</span>(), shared_key.<span class="hljs-built_in">size</span>(), key_other, ec_key, <span class="hljs-literal">NULL</span>) != shared_key_len) &#123;<br>        cerr &lt;&lt; <span class="hljs-string">&quot;Failed to compute shared key.&quot;</span> &lt;&lt; endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>;<br>    &#125;<br>    <span class="hljs-comment">// 转为字符串</span><br>    <span class="hljs-function">string <span class="hljs-title">str</span><span class="hljs-params">(shared_key.begin(), shared_key.end())</span></span>;<br>    <span class="hljs-keyword">return</span> str;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 <h1 id="实验结果">实验结果</h1>
-<p><img src="3.png" srcset="/linmu-blog/img/loading.gif" lazyload alt="服务器端" /><br /> <img src="4.png" srcset="/linmu-blog/img/loading.gif" lazyload
-alt="客户端" /><br /> 分析：<br /> 首先由客户端向服务器发送了 hello
+<img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/3.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="服务器端">
+<p><br /> <img src="/linmu-blog/2024/08/27/ROS-OpenSSL-SSL%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B/4.png" srcset="/linmu-blog/img/loading.gif" lazyload class="" title="客户端"><br /> 分析：<br /> 首先由客户端向服务器发送了
+hello
 消息，里面包含了证书套件，然后服务器返回消息中确定了证书套件并附上了证书链。<br />
 之后客户端对证书进行验证，并验证成功。<br />
 客户端生成了对等公钥发送给了服务器，服务器接收到之后马上同样生成了公钥并传给客户端。两者都根据对方的对等公钥及自身的密钥对生成了对称密钥。可以看到双方的对称公钥生成是相同的。<br />
@@ -422,7 +419,7 @@ client!" 同样使用了 AES 进行加密。</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年8月27日</div>
+          <div>2024年9月2日</div>
         </div>
       
       
@@ -607,21 +604,6 @@ client!" 同样使用了 AES 进行加密。</p>
 <script  src="/linmu-blog/js/events.js" ></script>
 <script  src="/linmu-blog/js/plugins.js" ></script>
 
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
 
 
 
